@@ -24,7 +24,7 @@ def to_compact_json(data):
     return json.dumps(data, separators=(',', ':'))
 
 def main(site_config_path, output_html_path, log_dir):
-    with open(site_config_path) as fp:
+    with open(site_config_path, encoding='UTF8') as fp:
         sites = yaml.load_all(fp.read())
     recent_logs = list(read_recent_logs(log_dir, 3))
     last_log_entry = recent_logs[-1]
@@ -58,7 +58,7 @@ def main(site_config_path, output_html_path, log_dir):
         timestamp=datetime.datetime.now(),
         stats_by_site=to_compact_json(stats_by_site),
     )
-    with open(output_html_path, 'w') as fp:
+    with open(output_html_path, 'w', , encoding='UTF8') as fp:
         fp.write(html.encode('utf-8'))
 
 if __name__ == '__main__':

@@ -15,7 +15,7 @@ ENGINES = {
 }
 
 def main(site_config_path, log_dir):
-    with open(site_config_path) as fp:
+    with open(site_config_path , encoding='UTF8') as fp:
         sites = yaml.load_all(fp.read())
     log_entry = {'stats': {}}
     for site in sites:
@@ -47,7 +47,7 @@ def main(site_config_path, log_dir):
     except OSError:
         pass # already exist
     with open(os.path.join(log_dir, 'wikistat.log.' + datetime.date.today().strftime('%Y%m%d')), 'a') as fp:
-        fp.write(json.dumps(log_entry) + '\n')
+        fp.write(json.dumps(log_entry) + '\n', , encoding='UTF8')
 
 if __name__ == '__main__':
     main('sites.yml', 'logs')
